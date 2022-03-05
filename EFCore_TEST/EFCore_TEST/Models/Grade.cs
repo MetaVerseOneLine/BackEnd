@@ -11,6 +11,6 @@ namespace EFCore_TEST.Models
         public string GradeName { get; set; }
         public string Section { get; set; }
 
-        public ICollection<Student> Students { get; set; }
+        public ICollection<Student> Students { get; set; } = new HashSet<Student>();
     }
 }

@@ -36,10 +36,13 @@ namespace EFCore_TEST.Controllers
             {
                 return BadRequest();
             }
+            var tmp_grade = student.CurrentGradeId;
+            var temp = _context.Grades.FirstOrDefault(t => t.GradeId == tmp_grade);
 
+            temp.Students.Add(student);
             _context.Students.Add(student);
             _context.SaveChanges();
-
+            
             return CreatedAtRoute("GetStudent", new { id = student.Id }, student);
 
         }
@@ -52,6 +55,7 @@ namespace EFCore_TEST.Controllers
             {
                 return NotFound();
             }
+            var temp = _context.Grades.FirstOrDefault(t => t.GradeId == item.CurrentGradeId);
             return new ObjectResult(item);
         }
         /*

@@ -1,4 +1,5 @@
 using EFCore_TEST.Data;
+using EFCore_TEST.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace EFCore_TEST
@@ -31,11 +33,14 @@ namespace EFCore_TEST
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 28));
             services.AddDbContext<EFContext>(options => options.UseMySql(Configuration.GetConnectionString("Default"), serverVersion));
 
+            services.AddScoped<IGradeRepository, GradeRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EFCore_TEST", Version = "v1" });
             });
+
+            services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
