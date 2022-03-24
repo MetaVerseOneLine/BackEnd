@@ -17,20 +17,13 @@ namespace oneline.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
+        private readonly IBaseRepository _baseRepository;
         private readonly IMapper _mapper;
-        public UserController(IUserRepository userRepository, IMapper mapper)
+        public UserController(IUserRepository userRepository, IBaseRepository baseRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _baseRepository = baseRepository;
             _mapper = mapper;
-        }
-
-        private dynamic BaseResponse(int statuscode, string message)
-        {
-            IDictionary<string, object> base_response = new ExpandoObject();
-            base_response.Add("statusCode", statuscode);
-            base_response.Add("message", message);
-
-            return base_response;
         }
 
         [HttpPost("Login")]
@@ -54,13 +47,13 @@ namespace oneline.Controllers
             }
             if (_userRepository.DupCheck(input.UserId))
             {
-                return Ok(BaseResponse(202, "Id already exist"));
+                return Ok(_baseRepository.BaseResponse(202, "Id already exist"));
             }
             else
             {
                 User toAdd = _mapper.Map<User>(input);
                 _userRepository.Join(toAdd);
-                return Ok(BaseResponse(201, "Success"));
+                return Ok(_baseRepository.BaseResponse(201, "Success"));
             }
         }
 
@@ -69,9 +62,9 @@ namespace oneline.Controllers
         public ActionResult Check([FromBody] UserLoginDto input)
         {
             if (_userRepository.DupCheck(input.UserId))
-                return Ok(BaseResponse(202, "Id already exist"));
+                return Ok(_baseRepository.BaseResponse(202, "Id already exist"));
             else
-                return Ok(BaseResponse(201, "Success"));
+                return Ok(_baseRepository.BaseResponse(201, "Success"));
         }
 
         [HttpGet("{userid}")]

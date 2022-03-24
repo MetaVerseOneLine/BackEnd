@@ -15,7 +15,7 @@ namespace oneline.Mappers
             CreateMap<User, UserCreateDto>().ReverseMap();
             CreateMap<User, UserLoginDto>().ReverseMap();
             CreateMap<User, UserInfoDto>().ReverseMap();
-
+            CreateMap<Score, ScoreRegDto>().ReverseMap();
         }
     }
 }

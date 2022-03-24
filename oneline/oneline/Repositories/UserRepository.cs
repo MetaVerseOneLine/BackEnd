@@ -13,11 +13,9 @@ namespace oneline.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly OneLineContext _context;
-        private readonly IMapper _mapper;
-        public UserRepository(OneLineContext context, IMapper mapper)
+        public UserRepository(OneLineContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
         public bool DupCheck(string userid)
         {
@@ -57,7 +55,7 @@ namespace oneline.Repositories
             {
                 base_response.Add("statusCode", 201);
                 base_response.Add("message", "Success");
-                base_response.Add("Id", user.UserId);
+                base_response.Add("UserId", user.UserId);
             }
 
             return base_response;

@@ -45,7 +45,8 @@ namespace oneline
 
             // AddScoped : 요청내에서 상태를 유지하려는 경우
             services.AddScoped<IUserRepository, UserRepository>();
-
+            services.AddScoped<IBaseRepository, BaseRepository>();
+            services.AddScoped<IScoreRepository, ScoreRepository>();
 
         }
 
