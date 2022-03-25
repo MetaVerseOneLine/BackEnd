@@ -1123,11 +1123,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sangj\\github\\TIL\\ASP .NET Core\\oneline\\oneline\\oneline.csproj",
+      "projectUniqueName": "C:\\Users\\sangj\\github\\OneLineBackend\\oneline\\oneline\\oneline.csproj",
       "projectName": "oneline",
-      "projectPath": "C:\\Users\\sangj\\github\\TIL\\ASP .NET Core\\oneline\\oneline\\oneline.csproj",
+      "projectPath": "C:\\Users\\sangj\\github\\OneLineBackend\\oneline\\oneline\\oneline.csproj",
       "packagesPath": "C:\\Users\\sangj\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sangj\\github\\TIL\\ASP .NET Core\\oneline\\oneline\\obj\\",
+      "outputPath": "C:\\Users\\sangj\\github\\OneLineBackend\\oneline\\oneline\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
