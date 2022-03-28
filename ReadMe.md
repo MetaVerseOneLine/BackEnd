@@ -41,7 +41,7 @@ mysql workbench 설치 후, root 비밀번호 설정
 
 초기 기본데이터가 없는 상태일 것이기 때문에 아래 코드를 sql로 실행시켜서 기본 데이터를 생성해두고 테스트 해볼 것.
 
-```json
+```sql
 insert into onelinedb.users(UserId, UserPassword, UserName, UserContent, UserImg)
 value
 ("string", "string", "string", "string", "string"),
@@ -73,21 +73,15 @@ value
 
 수정 필요한 사항 있으면 요청할 것
 
-#### Score API (진행 중)
+#### ~~Score API~~ (완료. 사실 개판임 오류있을 가능성 있음)
 
 ~~score update 가 되지 않는 상태. 새로운 데이터로만 들어간다. 수정 필요.~~
 
 score update 개발 완료
 
-user_rank 개발 진행 필요.
+user_rank 개발 완료
 
-​	world ranking이 없는 경우
 
-​	world ranking이 3등까지 없는 경우
-
-​	world ranking이 3명 이상 있는 경우
-
-​	등 조건을 나누어서 진행해야 함. 빠뜨리는 조건 없도록 체크해서 할 예정
 
 #### World API
 

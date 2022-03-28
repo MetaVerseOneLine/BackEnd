@@ -16,6 +16,8 @@ namespace oneline.Repositories
         {
             _context = context;
         }
+
+        
         public void Register(Score score)
         {
             if(ScoreExist(score.WorldIdx, score.UserId))
@@ -51,22 +53,79 @@ namespace oneline.Repositories
             }
             foreach(Score world in userrank)
             {
-                result.Add(WorldRank(world.WorldIdx, userid));
+                IDictionary<string, object> worldrank = WorldRank(world.WorldIdx);
+                worldrank.Add("UserId", userid);
+                worldrank.Add("Score", world.MyScore);
+                worldrank.Add("Rank", MyRank(world.WorldIdx, userid));
+                
+                result.Add(worldrank);
             }
             return result;
         }
+        public int MyRank(int worldidx, string userid)
+        {
+            List<Score> worldscore = _context.Scores.Where(x => x.WorldIdx == worldidx).ToList();
+            worldscore = worldscore.OrderByDescending(x => x.MyScore).ThenBy(x => x.ScoreIdx).ToList();
+            int myrank = 1;
+            foreach(Score s in worldscore)
+            {
+                if(s.UserId == userid)
+                {
+                    break;
+                }
+                else
+                {
+                    myrank += 1;
+                }
+            }
+            return myrank;
 
-        public IDictionary<string, object> WorldRank(int worldidx, string userid)
+        }
+
+        public IDictionary<string, object> WorldRank(int worldidx)
         {
             IDictionary<string, object> worldrank = new ExpandoObject();
 
-            Score score = _context.Scores.Where(x => x.UserId == userid).FirstOrDefault(x => x.WorldIdx == worldidx);
-            worldrank.Add("UserId", userid);
+            List<Score> worldscore = _context.Scores.Where(x => x.WorldIdx == worldidx).ToList();
+            List<Score> top3 = new List<Score>();
+            int[] top3score = { 0, 0, 0 };
+            foreach(Score s in worldscore)
+            {
+                if(s.MyScore > top3score[2])
+                {
+                    top3score[2] = s.MyScore;
+                    if(top3.Count == 3)
+                    {
+                        top3.RemoveAt(2);
+                    }
+                    top3.Add(s);
+                    // 마지막꺼 빼야하는데
+                    top3 = top3.OrderByDescending(x => x.MyScore).ThenBy(x => x.ScoreIdx).ToList();
+                    Array.Sort(top3score);
+                    Array.Reverse(top3score);
+                }
+            }
             worldrank.Add("WorldIdx", worldidx);
-            worldrank.Add("Score", score.MyScore);
+            if(top3.Count >= 1)
+            {
+                worldrank.Add("1stUserId", top3[0].UserId);
+                worldrank.Add("1stScore", top3[0].MyScore);
+            }
+            else
+            {
+                worldrank.Add("message", "no rank data");
+            }
 
-
-
+            if(top3.Count >= 2)
+            {
+                worldrank.Add("2ndUserId", top3[1].UserId);
+                worldrank.Add("2ndScore", top3[1].MyScore);
+            }
+            if(top3.Count >= 3)
+            {
+                worldrank.Add("3rdUserId", top3[2].UserId);
+                worldrank.Add("3rdScore", top3[2].MyScore);
+            }
             return worldrank;
         }
     }
