@@ -37,16 +37,16 @@ namespace oneline.Controllers
             return Ok(_baseRepository.BaseResponse(201, "Success"));
         }
 
-        [HttpPost("User_Rank")]
-        public ActionResult<List<IDictionary<string, object>>> UserRank([FromBody] ScoreRegDto score)
+        [HttpGet("{userid}")]
+        public ActionResult<List<IDictionary<string, object>>> UserRank(string userid)
         {
-            if(_scoreRepository.UserRank(score.UserId) == null)
+            if(_scoreRepository.UserRank(userid) == null)
             {
                 return _baseRepository.BaseResponse(202, "no score data");
             }
             else
             {
-                return _scoreRepository.UserRank(score.UserId);
+                return _scoreRepository.UserRank(userid);
             }
         }
     }
