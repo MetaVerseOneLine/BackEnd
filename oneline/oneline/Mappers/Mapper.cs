@@ -18,6 +18,8 @@ namespace oneline.Mappers
             CreateMap<Score, ScoreRegDto>().ReverseMap();
             CreateMap<Achievement, AchievementDto>().ReverseMap();
             CreateMap<Quest, QuestDto>().ReverseMap();
+            CreateMap<World, WorldDto>().ReverseMap();
+            CreateMap<World, WorldListDto>().ReverseMap();
         }
     }
 }

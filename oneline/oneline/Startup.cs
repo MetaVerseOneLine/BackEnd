@@ -48,6 +48,8 @@ namespace oneline
             services.AddScoped<IBaseRepository, BaseRepository>();
             services.AddScoped<IScoreRepository, ScoreRepository>();
             services.AddScoped<IAchievementRepository, AchievementRepository>();
+            services.AddScoped<IWorldRepository, WorldRepository>();
+
 
 
         }
