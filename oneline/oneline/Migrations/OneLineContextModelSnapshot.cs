@@ -44,7 +44,7 @@ namespace oneline.Migrations
 
             modelBuilder.Entity("oneline.Models.Quest", b =>
                 {
-                    b.Property<int>("QeustIdx")
+                    b.Property<int>("QuestIdx")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -54,7 +54,7 @@ namespace oneline.Migrations
                     b.Property<int>("WorldIdx")
                         .HasColumnType("int");
 
-                    b.HasKey("QeustIdx");
+                    b.HasKey("QuestIdx");
 
                     b.HasIndex("WorldIdx");
 

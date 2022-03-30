@@ -8,7 +8,7 @@ using oneline.Data;
 namespace oneline.Migrations
 {
     [DbContext(typeof(OneLineContext))]
-    [Migration("20220323074355_NewMigration1")]
+    [Migration("20220329044853_NewMigration1")]
     partial class NewMigration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,7 +46,7 @@ namespace oneline.Migrations
 
             modelBuilder.Entity("oneline.Models.Quest", b =>
                 {
-                    b.Property<int>("QeustIdx")
+                    b.Property<int>("QuestIdx")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -56,7 +56,7 @@ namespace oneline.Migrations
                     b.Property<int>("WorldIdx")
                         .HasColumnType("int");
 
-                    b.HasKey("QeustIdx");
+                    b.HasKey("QuestIdx");
 
                     b.HasIndex("WorldIdx");
 

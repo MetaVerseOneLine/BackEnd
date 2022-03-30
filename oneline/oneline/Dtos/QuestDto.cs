@@ -7,7 +7,7 @@ namespace oneline.Dtos
 {
     public class QuestDto
     {
-        public int QeustIdx { get; set; }
+        public int QuestIdx { get; set; }
         public string QuestContent { get; set; }
     }
 }

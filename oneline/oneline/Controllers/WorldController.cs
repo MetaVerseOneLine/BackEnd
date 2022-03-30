@@ -28,11 +28,6 @@ namespace oneline.Controllers
         [HttpGet("{worldidx}")]
         public ActionResult<WorldDto> WorldDetail(int worldidx)
         {
-            if(worldidx == null)
-            {
-                return BadRequest();
-            }
-
             if(_worldRepository.GetWorld(worldidx) == null)
             {
                 return BadRequest();
@@ -44,7 +39,7 @@ namespace oneline.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public List<WorldListDto> GetAllWorld()
         {
             return _worldRepository.GetAllWorld();

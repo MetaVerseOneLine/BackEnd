@@ -28,6 +28,16 @@ namespace oneline.Controllers
         [HttpPost("Register")]
         public ActionResult Register([FromBody] ScoreRegDto score)
         {
+            int worldidx = score.WorldIdx;
+            string userid = score.UserId;
+            if(!(_baseRepository.WorldExist(worldidx)))
+            {
+                return Ok(_baseRepository.BaseResponse(202, "World not exist"));
+            }
+            if (!(_baseRepository.UserExist(userid)))
+            {
+                return Ok(_baseRepository.BaseResponse(203, "User not exist"));
+            }
             if(score == null)
             {
                 return BadRequest();
@@ -40,9 +50,9 @@ namespace oneline.Controllers
         [HttpGet("{userid}")]
         public ActionResult<List<IDictionary<string, object>>> UserRank(string userid)
         {
-            if(_scoreRepository.UserRank(userid) == null)
+            if(_scoreRepository.UserRank(userid).Count() == 0)
             {
-                return _baseRepository.BaseResponse(202, "no score data");
+                return Ok(_baseRepository.BaseResponse(202, "no score data"));
             }
             else
             {

@@ -9,7 +9,7 @@ namespace oneline.Models
     public class Quest
     {
         [Key]
-        public int QeustIdx { get; set; }
+        public int QuestIdx { get; set; }
 
         public int WorldIdx { get; set; }
         public string QuestContent { get; set; }

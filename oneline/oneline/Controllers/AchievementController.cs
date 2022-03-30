@@ -29,13 +29,18 @@ namespace oneline.Controllers
         [HttpPost("Register")]
         public ActionResult Register([FromBody] AchievementDto ach)
         {
-            if (ach == null)
-            {
-                Console.WriteLine("1");
-                return BadRequest();
-            }
+            int worldidx = ach.WorldIdx;
+            int questidx = ach.QuestIdx;
+            string userid = ach.UserId;
+
+            if (ach == null) return BadRequest();
+            if (!(_baseRepository.WorldExist(worldidx))) return Ok(_baseRepository.BaseResponse(202, "World not exist"));
+            if (!(_baseRepository.UserExist(userid))) return Ok(_baseRepository.BaseResponse(203, "User not exist"));
+            if (!(_baseRepository.QuestExist(questidx))) return Ok(_baseRepository.BaseResponse(204, "Quest not exist"));
+            if (_achievementRepository.AchievementExist(questidx, userid)) return Ok(_baseRepository.BaseResponse(205, "Already finish this quest"));
+            if (!(_achievementRepository.QuestCheck(questidx, worldidx))) return Ok(_baseRepository.BaseResponse(206, "Quest - World not matched"));
+
             Achievement nowach = _mapper.Map<Achievement>(ach);
-            Console.WriteLine("1-1");
             _achievementRepository.Register(nowach);
             return Ok(_baseRepository.BaseResponse(201, "Success"));
         }
@@ -43,9 +48,19 @@ namespace oneline.Controllers
         [HttpPost("Quest")]
         public ActionResult<List<QuestDto>> UndoQeust(AchievementDto info)
         {
-            if (_achievementRepository.UndoQuest(info.UserId, info.WorldIdx) == null)
+            int worldidx = info.WorldIdx;
+            string userid = info.UserId;
+            if (!(_baseRepository.WorldExist(worldidx)))
             {
-                return _baseRepository.BaseResponse(202, "All done");
+                return Ok(_baseRepository.BaseResponse(202, "World not exist"));
+            }
+            if (!(_baseRepository.UserExist(userid)))
+            {
+                return Ok(_baseRepository.BaseResponse(203, "User not exist"));
+            }
+            if (_achievementRepository.UndoQuest(info.UserId, info.WorldIdx).Count() == 0)
+            {
+                return Ok(_baseRepository.BaseResponse(202, "All done"));
             }
             else
             {
@@ -54,9 +69,14 @@ namespace oneline.Controllers
         }
 
         [HttpGet("{userid}")]
-        public IDictionary<string, object> AchievementGet(string userid)
+        public ActionResult<IDictionary<string, object>> AchievementGet(string userid)
         {
-            return _achievementRepository.AchievementGet(userid);
+            if (!(_baseRepository.UserExist(userid)))
+            {
+                return Ok(_baseRepository.BaseResponse(202, "User not exist"));
+            }
+
+            return Ok(_achievementRepository.AchievementGet(userid));
         }
     }
 }

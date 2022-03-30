@@ -19,6 +19,19 @@ namespace oneline.Repositories
             _context = context;
             _mapper = mapper;
         }
+
+        public bool AchievementExist(int questidx, string userid)
+        {
+            if (_context.Achievements.Where(x=>x.UserId == userid).FirstOrDefault(x => x.QuestIdx == questidx) == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public IDictionary<string, object> AchievementGet(string userid)
         {
             IDictionary<string, object> result = new ExpandoObject();
@@ -49,7 +62,7 @@ namespace oneline.Repositories
             foreach(Achievement d in did)
             {
                 IDictionary<string, object> temp = new ExpandoObject();
-                string questcontent = _context.Quests.Where(x => x.WorldIdx == d.WorldIdx).FirstOrDefault(x => x.QeustIdx == d.QuestIdx).QuestContent;
+                string questcontent = _context.Quests.Where(x => x.WorldIdx == d.WorldIdx).FirstOrDefault(x => x.QuestIdx == d.QuestIdx).QuestContent;
                 temp.Add("QuestContent", questcontent);
 
                 result.Add(temp);
@@ -57,17 +70,30 @@ namespace oneline.Repositories
             return result;
         }
 
-        public void Register(Achievement achievement)
+        public bool QuestCheck(int questidx, int worldidx)
         {
-            List<Achievement> worldach = _context.Achievements.Where(x => x.WorldIdx == achievement.WorldIdx).ToList();
-            Console.WriteLine("2");
-            if (_context.Achievements.Where(x => x.WorldIdx == achievement.WorldIdx).FirstOrDefault(x=>x.UserId == achievement.UserId) == null){
-                Console.WriteLine("3");
-                _context.Achievements.Add(achievement);
+            if (_context.Quests.FirstOrDefault(x => x.QuestIdx == questidx).WorldIdx == worldidx)
+            {
+                return true;
             }
-            _context.SaveChanges();
+            else
+            {
+                return false;
+            }
         }
 
+        public void Register(Achievement achievement)
+        {
+            _context.Achievements.Add(achievement);
+            /*
+            List<Achievement> worldach = _context.Achievements.Where(x => x.WorldIdx == achievement.WorldIdx).ToList();
+            
+            if (_context.Achievements.Where(x => x.WorldIdx == achievement.WorldIdx).FirstOrDefault(x=>x.UserId == achievement.UserId) == null){
+            }
+            */
+            _context.SaveChanges();
+        }
+        
         public List<QuestDto> UndoQuest(string userid, int worldidx)
         {
             List<Quest> allquest = _context.Quests.Where(x => x.WorldIdx == worldidx).ToList();
@@ -75,7 +101,7 @@ namespace oneline.Repositories
             List<QuestDto> result = new List<QuestDto>();
             foreach(Quest quest in allquest)
             {
-                if(donequest.Find(x=>x.QuestIdx == quest.QeustIdx) == null)
+                if(donequest.Find(x=>x.QuestIdx == quest.QuestIdx) == null)
                 {
                     QuestDto temp = _mapper.Map<QuestDto>(quest);
                     result.Add(temp);

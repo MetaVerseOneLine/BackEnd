@@ -56,7 +56,7 @@ namespace oneline.Migrations
                 name: "Quests",
                 columns: table => new
                 {
-                    QeustIdx = table.Column<int>(type: "int", nullable: false)
+                    QuestIdx = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     WorldIdx = table.Column<int>(type: "int", nullable: false),
                     QuestContent = table.Column<string>(type: "longtext", nullable: true)
@@ -64,7 +64,7 @@ namespace oneline.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Quests", x => x.QeustIdx);
+                    table.PrimaryKey("PK_Quests", x => x.QuestIdx);
                     table.ForeignKey(
                         name: "FK_Quests_Worlds_WorldIdx",
                         column: x => x.WorldIdx,
@@ -121,7 +121,7 @@ namespace oneline.Migrations
                         name: "FK_Achievements_Quests_QuestIdx",
                         column: x => x.QuestIdx,
                         principalTable: "Quests",
-                        principalColumn: "QeustIdx",
+                        principalColumn: "QuestIdx",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Achievements_Users_UserId",

@@ -14,5 +14,7 @@ namespace oneline.Repositories
         List<IDictionary<string, object>> DoQuest(string userid);
         float AchievementTotal(string userid);
         IDictionary<string, object> AchievementGet(string userid);
+        bool AchievementExist(int questidx, string userid);
+        bool QuestCheck(int questidx, int worldidx);
     }
 }

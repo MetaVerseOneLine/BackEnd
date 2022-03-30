@@ -13,6 +13,7 @@ namespace oneline.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly OneLineContext _context;
+
         public UserRepository(OneLineContext context)
         {
             _context = context;
@@ -41,21 +42,25 @@ namespace oneline.Repositories
         {
             IDictionary<string, object> base_response = new ExpandoObject();
             User dbUser = _context.Users.FirstOrDefault(x => x.UserId == user.UserId);
-            if(DupCheck(user.UserId))
+            if (DupCheck(user.UserId)) // id 존재하면
             {
-                base_response.Add("statusCode", 202);
-                base_response.Add("message", "id not exist");
-            }
-            else if (dbUser.UserPassword != user.UserPassword)
-            {
-                base_response.Add("statusCode", 203);
-                base_response.Add("message", "pw not matched");
+                if (dbUser.UserPassword != user.UserPassword) // id 있는데 password 틀리면
+                {
+                    base_response.Add("statusCode", 203);
+                    base_response.Add("message", "pw not matched");
+                }
+                else
+                {
+                    base_response.Add("statusCode", 201);
+                    base_response.Add("message", "Success");
+                    base_response.Add("UserId", user.UserId);
+
+                }
             }
             else
             {
-                base_response.Add("statusCode", 201);
-                base_response.Add("message", "Success");
-                base_response.Add("UserId", user.UserId);
+                base_response.Add("statusCode", 202);
+                base_response.Add("message", "id not exist");
             }
 
             return base_response;
