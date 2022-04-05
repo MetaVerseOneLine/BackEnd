@@ -46,21 +46,21 @@ namespace oneline.Repositories
             {
                 if (dbUser.UserPassword != user.UserPassword) // id 있는데 password 틀리면
                 {
-                    base_response.Add("statusCode", 203);
-                    base_response.Add("message", "pw not matched");
+                    base_response.Add("statusCode", 318);
+                    base_response.Add("message", "PW not matched");
                 }
                 else
                 {
                     base_response.Add("statusCode", 201);
                     base_response.Add("message", "Success");
-                    base_response.Add("UserId", user.UserId);
+                    base_response.Add("userId", user.UserId);
 
                 }
             }
             else
             {
-                base_response.Add("statusCode", 202);
-                base_response.Add("message", "id not exist");
+                base_response.Add("statusCode", 311);
+                base_response.Add("message", "User not exist");
             }
 
             return base_response;

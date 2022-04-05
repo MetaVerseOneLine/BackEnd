@@ -25,17 +25,17 @@ namespace oneline.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{worldidx}")]
-        public ActionResult<WorldDto> WorldDetail(int worldidx)
+        [HttpPost("Detail")]
+        public ActionResult<IDictionary<string, object>> WorldDetail(WorldDetailDto input)
         {
-            if(_worldRepository.GetWorld(worldidx) == null)
+            if(_worldRepository.GetWorld(input.WorldIdx) == null)
             {
                 return BadRequest();
             }
             else
             {
-                WorldDto detail = _worldRepository.WorldDetail(_worldRepository.GetWorld(worldidx));
-                return detail;
+                IDictionary<string, object> detail = _worldRepository.WorldDetail(_worldRepository.GetWorld(input.WorldIdx), input.UserId);
+                return Ok(detail);
             }
         }
 

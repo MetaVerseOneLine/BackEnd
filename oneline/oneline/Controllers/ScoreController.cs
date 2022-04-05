@@ -32,11 +32,11 @@ namespace oneline.Controllers
             string userid = score.UserId;
             if(!(_baseRepository.WorldExist(worldidx)))
             {
-                return Ok(_baseRepository.BaseResponse(202, "World not exist"));
+                return Ok(_baseRepository.BaseResponse(312, "World not exist"));
             }
             if (!(_baseRepository.UserExist(userid)))
             {
-                return Ok(_baseRepository.BaseResponse(203, "User not exist"));
+                return Ok(_baseRepository.BaseResponse(311, "User not exist"));
             }
             if(score == null)
             {
@@ -52,7 +52,7 @@ namespace oneline.Controllers
         {
             if(_scoreRepository.UserRank(userid).Count() == 0)
             {
-                return Ok(_baseRepository.BaseResponse(202, "no score data"));
+                return Ok(_baseRepository.BaseResponse(316, "No score data"));
             }
             else
             {

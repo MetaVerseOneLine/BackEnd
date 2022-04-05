@@ -47,7 +47,7 @@ namespace oneline.Controllers
             }
             if (_userRepository.DupCheck(input.UserId))
             {
-                return Ok(_baseRepository.BaseResponse(202, "Id already exist"));
+                return Ok(_baseRepository.BaseResponse(317, "Id already exist"));
             }
             else
             {
@@ -62,7 +62,7 @@ namespace oneline.Controllers
         public ActionResult Check([FromBody] UserLoginDto input)
         {
             if (_userRepository.DupCheck(input.UserId))
-                return Ok(_baseRepository.BaseResponse(202, "Id already exist"));
+                return Ok(_baseRepository.BaseResponse(317, "Id already exist"));
             else
                 return Ok(_baseRepository.BaseResponse(201, "Success"));
         }

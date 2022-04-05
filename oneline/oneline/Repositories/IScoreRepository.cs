@@ -13,6 +13,7 @@ namespace oneline.Repositories
         void Register(Score score);
         bool ScoreExist(int worldidx, string userid);
         IDictionary<string, object> WorldRank(int worldidx);
+        IDictionary<string, object> WorldRank5(int worldidx);
         List<IDictionary<string, object>> UserRank(string userid);
         int MyRank(int worldidx, string userid);
     }

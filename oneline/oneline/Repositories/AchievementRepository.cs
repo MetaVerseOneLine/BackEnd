@@ -36,8 +36,8 @@ namespace oneline.Repositories
         {
             IDictionary<string, object> result = new ExpandoObject();
 
-            result.Add("DoneQuest", DoQuest(userid));
-            result.Add("Total", AchievementTotal(userid));
+            result.Add("doneQuest", DoQuest(userid));
+            result.Add("total", AchievementTotal(userid));
 
             return result;
         }
@@ -63,8 +63,8 @@ namespace oneline.Repositories
             {
                 IDictionary<string, object> temp = new ExpandoObject();
                 string questcontent = _context.Quests.Where(x => x.WorldIdx == d.WorldIdx).FirstOrDefault(x => x.QuestIdx == d.QuestIdx).QuestContent;
-                temp.Add("QuestContent", questcontent);
-
+                temp.Add("questContent", questcontent);
+                
                 result.Add(temp);
             }
             return result;

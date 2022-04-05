@@ -4,6 +4,7 @@ using oneline.Dtos;
 using oneline.Models;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,11 +14,15 @@ namespace oneline.Repositories
     {
         private readonly OneLineContext _context;
         private readonly IMapper _mapper;
+        private readonly IAchievementRepository _achievementRepository;
+        private readonly IScoreRepository _scoreRepository;
 
-        public WorldRepository(OneLineContext context, IMapper mapper)
+        public WorldRepository(OneLineContext context, IMapper mapper, IAchievementRepository achievementRepository, IScoreRepository scoreRepository)
         {
             _context = context;
             _mapper = mapper;
+            _achievementRepository = achievementRepository;
+            _scoreRepository = scoreRepository;
         }
 
         public List<WorldListDto> GetAllWorld()
@@ -38,9 +43,34 @@ namespace oneline.Repositories
             return world;
         }
 
-        public WorldDto WorldDetail(World world)
+        public IDictionary<string, object> WorldDetail(World world, string userid)
         {
-            WorldDto detail = _mapper.Map<WorldDto>(world);
+            IDictionary<string, object> detail = new ExpandoObject();
+            detail.Add("worldIdx", world.WorldIdx);
+            detail.Add("worldName", world.WorldName);
+            detail.Add("worldContent", world.WorldContent);
+            detail.Add("worldScene", world.WorldScene);
+            detail.Add("worldCategory", world.WorldCategory);
+            detail.Add("worldImg", world.WorldImg);
+
+
+            if (world.WorldCategory == "edu")
+            {
+                List<IDictionary<string, object>> questlist = _achievementRepository.DoQuest(userid);
+                if(questlist.Count() == 0)
+                {
+                    detail.Add("DoneQuest", "AllDone");
+                }
+                else
+                {
+                    detail.Add("DoneQuest", questlist);
+                }
+
+            }
+            else if (world.WorldCategory == "game")
+            {
+                detail.Add("worldRank5", _scoreRepository.WorldRank5(world.WorldIdx));
+            }
             return detail;
         }
     }

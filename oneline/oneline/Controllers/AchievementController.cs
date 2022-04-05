@@ -34,11 +34,11 @@ namespace oneline.Controllers
             string userid = ach.UserId;
 
             if (ach == null) return BadRequest();
-            if (!(_baseRepository.WorldExist(worldidx))) return Ok(_baseRepository.BaseResponse(202, "World not exist"));
-            if (!(_baseRepository.UserExist(userid))) return Ok(_baseRepository.BaseResponse(203, "User not exist"));
-            if (!(_baseRepository.QuestExist(questidx))) return Ok(_baseRepository.BaseResponse(204, "Quest not exist"));
-            if (_achievementRepository.AchievementExist(questidx, userid)) return Ok(_baseRepository.BaseResponse(205, "Already finish this quest"));
-            if (!(_achievementRepository.QuestCheck(questidx, worldidx))) return Ok(_baseRepository.BaseResponse(206, "Quest - World not matched"));
+            if (!(_baseRepository.WorldExist(worldidx))) return Ok(_baseRepository.BaseResponse(312, "World not exist"));
+            if (!(_baseRepository.UserExist(userid))) return Ok(_baseRepository.BaseResponse(311, "User not exist"));
+            if (!(_baseRepository.QuestExist(questidx))) return Ok(_baseRepository.BaseResponse(313, "Quest not exist"));
+            if (_achievementRepository.AchievementExist(questidx, userid)) return Ok(_baseRepository.BaseResponse(314, "Already finish this quest"));
+            if (!(_achievementRepository.QuestCheck(questidx, worldidx))) return Ok(_baseRepository.BaseResponse(315, "Quest - World not matched"));
 
             Achievement nowach = _mapper.Map<Achievement>(ach);
             _achievementRepository.Register(nowach);
@@ -52,15 +52,15 @@ namespace oneline.Controllers
             string userid = info.UserId;
             if (!(_baseRepository.WorldExist(worldidx)))
             {
-                return Ok(_baseRepository.BaseResponse(202, "World not exist"));
+                return Ok(_baseRepository.BaseResponse(312, "World not exist"));
             }
             if (!(_baseRepository.UserExist(userid)))
             {
-                return Ok(_baseRepository.BaseResponse(203, "User not exist"));
+                return Ok(_baseRepository.BaseResponse(311, "User not exist"));
             }
             if (_achievementRepository.UndoQuest(info.UserId, info.WorldIdx).Count() == 0)
             {
-                return Ok(_baseRepository.BaseResponse(202, "All done"));
+                return Ok(_baseRepository.BaseResponse(202, "Quest all done"));
             }
             else
             {
@@ -73,7 +73,7 @@ namespace oneline.Controllers
         {
             if (!(_baseRepository.UserExist(userid)))
             {
-                return Ok(_baseRepository.BaseResponse(202, "User not exist"));
+                return Ok(_baseRepository.BaseResponse(311, "User not exist"));
             }
 
             return Ok(_achievementRepository.AchievementGet(userid));

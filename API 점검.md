@@ -75,17 +75,28 @@
 1. ~~서연이 요청대로 name 넣어서 출력 변경필요~~
 2. ~~정상입력 성공~~
 3. ~~없는 id - 비어 있는 list 출력~~
-4. 랭킹에 1st -> First로 변경
+4. ~~랭킹에 1st -> first로 변경~~
 
 
 
 
 
+status code 일관성 있게 수정
 
+201 - Success
 
-world_idx : 0, world_name : "국어", world_img : 0, world_category : "edu"
-world_idx : 1, world_name : "수학", world_img : 1, world_category : "edu"
-world_idx : 2, world_name : "사회", world_img : 2, world_category : "edu"
-world_idx : 3, world_name : "과학", world_img : 3, world_category : "edu"
-world_idx : 4, world_name : "카트", world_img : 4, world_category : "game"
-world_idx : 5, world_name : "게임", world_img : 5, world_category : "game"
+311 - User not exist
+
+312 - World not exist
+
+313 - Quest not exist
+
+314 - Already finish this quest
+
+315 - Quest - World not matched
+
+316 - No score data
+
+317 - Id already exist
+
+318 - PW not matched

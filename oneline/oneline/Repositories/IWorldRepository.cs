@@ -9,7 +9,7 @@ namespace oneline.Repositories
 {
     public interface IWorldRepository
     {
-        WorldDto WorldDetail(World world);
+        IDictionary<string, object> WorldDetail(World world, string userid);
         List<WorldListDto> GetAllWorld();
         World GetWorld(int worldidx);
     }
