@@ -67,8 +67,8 @@ namespace oneline.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("MyScore")
-                        .HasColumnType("int");
+                    b.Property<float>("MyScore")
+                        .HasColumnType("float");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");

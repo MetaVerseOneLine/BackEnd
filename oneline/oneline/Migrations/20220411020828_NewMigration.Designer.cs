@@ -8,8 +8,8 @@ using oneline.Data;
 namespace oneline.Migrations
 {
     [DbContext(typeof(OneLineContext))]
-    [Migration("20220329044853_NewMigration1")]
-    partial class NewMigration1
+    [Migration("20220411020828_NewMigration")]
+    partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,8 +69,8 @@ namespace oneline.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("MyScore")
-                        .HasColumnType("int");
+                    b.Property<float>("MyScore")
+                        .HasColumnType("float");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");

@@ -42,3 +42,4 @@ C:\Users\sangj\github\OneLineBackend\oneline\oneline\obj\Debug\net5.0\linux-x64\
 C:\Users\sangj\github\OneLineBackend\oneline\oneline\obj\Debug\net5.0\linux-x64\ref\oneline.dll
 C:\Users\sangj\github\OneLineBackend\oneline\oneline\obj\Debug\net5.0\linux-x64\oneline.pdb
 C:\Users\sangj\github\OneLineBackend\oneline\oneline\obj\Debug\net5.0\linux-x64\oneline.genruntimeconfig.cache
+C:\Users\sangj\github\OneLineBackend\oneline\oneline\bin\Debug\net5.0\linux-x64\aws-beanstalk-tools-defaults.json

@@ -1,6 +1,7 @@
 C:\Users\sangj\github\OneLineBackend\oneline\oneline\bin\Debug\net5.0\publish\oneline
 C:\Users\sangj\github\OneLineBackend\oneline\oneline\bin\Debug\net5.0\publish\appsettings.Development.json
 C:\Users\sangj\github\OneLineBackend\oneline\oneline\bin\Debug\net5.0\publish\appsettings.json
+C:\Users\sangj\github\OneLineBackend\oneline\oneline\bin\Debug\net5.0\publish\aws-beanstalk-tools-defaults.json
 C:\Users\sangj\github\OneLineBackend\oneline\oneline\bin\Debug\net5.0\publish\oneline.dll
 C:\Users\sangj\github\OneLineBackend\oneline\oneline\bin\Debug\net5.0\publish\oneline.runtimeconfig.json
 C:\Users\sangj\github\OneLineBackend\oneline\oneline\bin\Debug\net5.0\publish\oneline.pdb

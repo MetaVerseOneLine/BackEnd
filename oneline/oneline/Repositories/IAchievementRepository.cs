@@ -12,6 +12,7 @@ namespace oneline.Repositories
         void Register(Achievement achievement);
         List<QuestDto> UndoQuest(string userid, int worldidx);
         List<IDictionary<string, object>> DoQuest(string userid);
+        List<IDictionary<string, object>> DoneQuest(string userid, int worldidx);
         float AchievementTotal(string userid);
         IDictionary<string, object> AchievementGet(string userid);
         bool AchievementExist(int questidx, string userid);

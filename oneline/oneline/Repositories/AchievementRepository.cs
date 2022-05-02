@@ -69,6 +69,20 @@ namespace oneline.Repositories
             }
             return result;
         }
+        public List<IDictionary<string, object>> DoneQuest(string userid, int worldidx)
+        {
+            List<IDictionary<string, object>> result = new List<IDictionary<string, object>>();
+            List<Achievement> did = _context.Achievements.Where(x => x.UserId == userid).Where(x=>x.WorldIdx == worldidx).ToList();
+            foreach (Achievement d in did)
+            {
+                IDictionary<string, object> temp = new ExpandoObject();
+                string questcontent = _context.Quests.Where(x => x.WorldIdx == d.WorldIdx).FirstOrDefault(x => x.QuestIdx == d.QuestIdx).QuestContent;
+                temp.Add("questContent", questcontent);
+
+                result.Add(temp);
+            }
+            return result;
+        }
 
         public bool QuestCheck(int questidx, int worldidx)
         {

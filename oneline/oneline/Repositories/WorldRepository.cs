@@ -56,15 +56,8 @@ namespace oneline.Repositories
 
             if (world.WorldCategory == "edu")
             {
-                List<IDictionary<string, object>> questlist = _achievementRepository.DoQuest(userid);
-                if(questlist.Count() == 0)
-                {
-                    detail.Add("DoneQuest", "AllDone");
-                }
-                else
-                {
-                    detail.Add("DoneQuest", questlist);
-                }
+                List<IDictionary<string, object>> questlist = _achievementRepository.DoneQuest(userid, world.WorldIdx);
+                detail.Add("doneQuest", questlist);
 
             }
             else if (world.WorldCategory == "game")

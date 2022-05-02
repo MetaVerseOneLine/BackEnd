@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace oneline.Migrations
 {
-    public partial class NewMigration1 : Migration
+    public partial class NewMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -83,7 +83,7 @@ namespace oneline.Migrations
                     UserId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     WorldIdx = table.Column<int>(type: "int", nullable: false),
-                    MyScore = table.Column<int>(type: "int", nullable: false)
+                    MyScore = table.Column<float>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {

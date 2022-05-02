@@ -56,7 +56,7 @@ namespace oneline.Repositories
                 IDictionary<string, object> worldrank = WorldRank(world.WorldIdx);
                 worldrank.Add("userId", userid);
                 worldrank.Add("userName", _context.Users.FirstOrDefault(x => x.UserId == userid).UserName);
-                worldrank.Add("score", world.MyScore);
+                worldrank.Add("score", string.Format("{0:N2}",world.MyScore));
                 worldrank.Add("rank", MyRank(world.WorldIdx, userid));
                 
                 result.Add(worldrank);
@@ -89,7 +89,7 @@ namespace oneline.Repositories
 
             List<Score> worldscore = _context.Scores.Where(x => x.WorldIdx == worldidx).ToList();
             List<Score> top3 = new List<Score>();
-            int[] top3score = { 0, 0, 0 };
+            float[] top3score = { 0, 0, 0 };
             foreach(Score s in worldscore)
             {
                 if(s.MyScore > top3score[2])
@@ -111,7 +111,7 @@ namespace oneline.Repositories
             {
                 worldrank.Add("firstUserId", top3[0].UserId);
                 worldrank.Add("firstUserName", _context.Users.FirstOrDefault(x=>x.UserId == top3[0].UserId).UserName);
-                worldrank.Add("firstScore", top3[0].MyScore);
+                worldrank.Add("firstScore", string.Format("{0:N2}", top3[0].MyScore));
             }
             else
             {
@@ -122,13 +122,13 @@ namespace oneline.Repositories
             {
                 worldrank.Add("secondUserId", top3[1].UserId);
                 worldrank.Add("secondUserName", _context.Users.FirstOrDefault(x => x.UserId == top3[1].UserId).UserName);
-                worldrank.Add("secondScore", top3[1].MyScore);
+                worldrank.Add("secondScore", string.Format("{0:N2}", top3[1].MyScore));
             }
             if(top3.Count >= 3)
             {
                 worldrank.Add("thirdUserId", top3[2].UserId);
                 worldrank.Add("thirdUserName", _context.Users.FirstOrDefault(x => x.UserId == top3[2].UserId).UserName);
-                worldrank.Add("thirdScore", top3[2].MyScore);
+                worldrank.Add("thirdScore", string.Format("{0:N2}", top3[2].MyScore));
             }
             return worldrank;
         }
@@ -139,7 +139,7 @@ namespace oneline.Repositories
 
             List<Score> worldscore = _context.Scores.Where(x => x.WorldIdx == worldidx).ToList();
             List<Score> top5 = new List<Score>();
-            int[] top5score = { 0, 0, 0, 0, 0 };
+            float[] top5score = { 0, 0, 0, 0, 0 };
             foreach (Score s in worldscore)
             {
                 if (s.MyScore > top5score[4])
@@ -161,7 +161,19 @@ namespace oneline.Repositories
             {
                 worldrank.Add("firstUserId", top5[0].UserId);
                 worldrank.Add("firstUserName", _context.Users.FirstOrDefault(x => x.UserId == top5[0].UserId).UserName);
-                worldrank.Add("firstScore", top5[0].MyScore);
+                worldrank.Add("firstScore", string.Format("{0:N2}", top5[0].MyScore));
+                worldrank.Add("secondUserId", "-");
+                worldrank.Add("secondUserName", "-");
+                worldrank.Add("secondScore", "-");
+                worldrank.Add("thirdUserId", "-");
+                worldrank.Add("thirdUserName", "-");
+                worldrank.Add("thirdScore", "-");
+                worldrank.Add("forthUserId", "-");
+                worldrank.Add("forthUserName", "-");
+                worldrank.Add("forthScore", "-");
+                worldrank.Add("fifthUserId", "-");
+                worldrank.Add("fifthUserName", "-");
+                worldrank.Add("fifthScore", "-");
             }
             else
             {
@@ -170,27 +182,39 @@ namespace oneline.Repositories
 
             if (top5.Count >= 2)
             {
+                worldrank.Remove("secondUserId");
+                worldrank.Remove("secondUserName");
+                worldrank.Remove("secondScore");
                 worldrank.Add("secondUserId", top5[1].UserId);
                 worldrank.Add("secondUserName", _context.Users.FirstOrDefault(x => x.UserId == top5[1].UserId).UserName);
-                worldrank.Add("secondScore", top5[1].MyScore);
+                worldrank.Add("secondScore", string.Format("{0:N2}", top5[1].MyScore));
             }
             if (top5.Count >= 3)
             {
+                worldrank.Remove("thirdUserId");
+                worldrank.Remove("thirdUserName");
+                worldrank.Remove("thirdScore");
                 worldrank.Add("thirdUserId", top5[2].UserId);
                 worldrank.Add("thirdUserName", _context.Users.FirstOrDefault(x => x.UserId == top5[2].UserId).UserName);
-                worldrank.Add("thirdScore", top5[2].MyScore);
+                worldrank.Add("thirdScore", string.Format("{0:N2}", top5[2].MyScore));
             }
             if (top5.Count >= 4)
             {
+                worldrank.Remove("forthUserId");
+                worldrank.Remove("forthUserName");
+                worldrank.Remove("forthScore");
                 worldrank.Add("forthUserId", top5[3].UserId);
                 worldrank.Add("forthUserName", _context.Users.FirstOrDefault(x => x.UserId == top5[3].UserId).UserName);
-                worldrank.Add("forthScore", top5[3].MyScore);
+                worldrank.Add("forthScore", string.Format("{0:N2}", top5[3].MyScore));
             }
             if (top5.Count >= 5)
             {
+                worldrank.Remove("fifthUserId");
+                worldrank.Remove("fifthUserName");
+                worldrank.Remove("fifthScore");
                 worldrank.Add("fifthUserId", top5[4].UserId);
                 worldrank.Add("fifthUserName", _context.Users.FirstOrDefault(x => x.UserId == top5[4].UserId).UserName);
-                worldrank.Add("fifthScore", top5[4].MyScore);
+                worldrank.Add("fifthScore", string.Format("{0:N2}", top5[4].MyScore));
             }
             return worldrank;
         }

@@ -9,6 +9,6 @@ namespace oneline.Dtos
     {
         public string UserId { get; set; }
         public int WorldIdx { get; set; }
-        public int MyScore { get; set; }
+        public float MyScore { get; set; }
     }
 }
